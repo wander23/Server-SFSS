@@ -19,7 +19,7 @@ public class PhotoController {
     ResponseEntity<ResponeObject> addImage(@RequestBody Photo newPhoto)
     {
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponeObject("ok", "succesfully", photoResponsitory.save(newPhoto))
+                new ResponeObject(photoResponsitory.save(newPhoto))
         );
     }
 
@@ -28,7 +28,7 @@ public class PhotoController {
     {
         System.out.println(Photos);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponeObject("ok", "succesfully", photoResponsitory.saveAll(Photos))
+                new ResponeObject(photoResponsitory.saveAll(Photos))
         );
     }
 
@@ -37,7 +37,7 @@ public class PhotoController {
     {
         List<Photo> foundAll = photoResponsitory.findByIdUser(id);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponeObject("ok", "succesfully", foundAll)
+                new ResponeObject(foundAll)
         );
     }
 
