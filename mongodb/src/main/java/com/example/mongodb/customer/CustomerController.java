@@ -78,7 +78,7 @@ public class CustomerController {
                     new ResponeObject("")
             );
         }
-        Optional<Customer> foundCustomer = customerResponsitory.findByUsernameAndAndPassword(checkCustomer.getUsername(), checkCustomer.getPassword());
+        Optional<Customer> foundCustomer = customerResponsitory.findByUsernameAndPassword(checkCustomer.getUsername(), checkCustomer.getPassword());
         return foundCustomer.isPresent() ?
                 ResponseEntity.status(HttpStatus.OK).body(
                         new ResponeObject(foundCustomer)

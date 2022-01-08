@@ -27,7 +27,6 @@ public class PhotoController {
     @PostMapping("/multiple")
     ResponseEntity<ResponeObject> addImages(@RequestBody List<Photo> Photos)
     {
-        System.out.println(Photos);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponeObject(photoResponsitory.saveAll(Photos))
         );
