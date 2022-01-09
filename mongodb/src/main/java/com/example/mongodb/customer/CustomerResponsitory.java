@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface CustomerResponsitory extends MongoRepository<Customer,String> {
     Optional<Customer> findByUsernameAndPassword(String username, String password);
     Optional<Customer> findByUsername(String username);
+    Optional<Customer> findByEAndN(int e, int n);
 }

@@ -46,20 +46,32 @@ public class CustomerController {
                 );
     }
 
+    @PostMapping("/check_username/{username}")
+    ResponseEntity<ResponeObject> username(@PathVariable String username) {
+        Optional<Customer> foundCustomer = customerResponsitory.findByUsername(username);
+        return foundCustomer.isPresent() ?
+                ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
+                        new ResponeObject("")
+                ) :
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new ResponeObject("")
+                );
+    }
+
+    @PostMapping("/check_publickey/{e}&{n}")
+    ResponseEntity<ResponeObject> publickey(@PathVariable String e, @PathVariable String n) {
+        Optional<Customer> foundCustomer = customerResponsitory.findByEAndN(Integer.parseInt(e),Integer.parseInt(n));
+        return foundCustomer.isPresent() ?
+                ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
+                        new ResponeObject("")
+                ) :
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new ResponeObject("")
+                );
+    }
+
     @PostMapping("/register")
     ResponseEntity<ResponeObject> register(@RequestBody Customer newCustomer) {
-        if (!Objects.equals(newCustomer.getUsername(), newCustomer.getUsername().replaceAll("\\s", ""))) {
-            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
-                    new ResponeObject("")
-            );
-        }
-
-        if (newCustomer.getPassword().length() < 6 || !Objects.equals(newCustomer.getPassword(), newCustomer.getPassword().replaceAll("\\s", ""))) {
-            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
-                    new ResponeObject("")
-            );
-        }
-
         Optional<Customer> foundCustomer = customerResponsitory.findByUsername(newCustomer.getUsername());
         return foundCustomer.isPresent() ?
                 ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
@@ -72,13 +84,7 @@ public class CustomerController {
 
     @PostMapping("/login")
     ResponseEntity<ResponeObject> login(@RequestBody Customer checkCustomer) {
-        Optional<Customer> foundUsername = customerResponsitory.findByUsername(checkCustomer.getUsername());
-        if (!foundUsername.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
-                    new ResponeObject("")
-            );
-        }
-        Optional<Customer> foundCustomer = customerResponsitory.findByUsernameAndPassword(checkCustomer.getUsername(), checkCustomer.getPassword());
+    Optional<Customer> foundCustomer = customerResponsitory.findByUsernameAndPassword(checkCustomer.getUsername(), checkCustomer.getPassword());
         return foundCustomer.isPresent() ?
                 ResponseEntity.status(HttpStatus.OK).body(
                         new ResponeObject(foundCustomer)
