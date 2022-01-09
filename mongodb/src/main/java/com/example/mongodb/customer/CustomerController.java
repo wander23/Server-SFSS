@@ -46,7 +46,7 @@ public class CustomerController {
                 );
     }
 
-    @PostMapping("/check_username/{username}")
+    @GetMapping("/username/{username}")
     ResponseEntity<ResponeObject> username(@PathVariable String username) {
         Optional<Customer> foundCustomer = customerResponsitory.findByUsername(username);
         return foundCustomer.isPresent() ?
@@ -58,7 +58,7 @@ public class CustomerController {
                 );
     }
 
-    @PostMapping("/check_publickey/{e}&{n}")
+    @GetMapping("/publickey/{e}&{n}")
     ResponseEntity<ResponeObject> publickey(@PathVariable String e, @PathVariable String n) {
         Optional<Customer> foundCustomer = customerResponsitory.findByEAndN(Integer.parseInt(e),Integer.parseInt(n));
         return foundCustomer.isPresent() ?
