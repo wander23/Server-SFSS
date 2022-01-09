@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -27,17 +26,9 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<ResponeObject> findone(@PathVariable String id) {
-        Optional<Customer> findone = customerResponsitory.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponeObject(findone)
-        );
-    }
-
-    @PostMapping("/{id}")
     ResponseEntity<ResponeObject> checkId(@PathVariable String id) {
         Optional<Customer> foundID = customerResponsitory.findById(id);
-        return foundID.isPresent() ?
+        return !foundID.isPresent() ?
                 ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
                         new ResponeObject("")
                 ) :
