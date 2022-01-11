@@ -25,18 +25,6 @@ public class CustomerController {
 
     }
 
-    @GetMapping("/{id}")
-    ResponseEntity<ResponeObject> checkId(@PathVariable String id) {
-        Optional<Customer> foundID = customerResponsitory.findById(id);
-        return !foundID.isPresent() ?
-                ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
-                        new ResponeObject("")
-                ) :
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new ResponeObject("")
-                );
-    }
-
     @GetMapping("/pubkey/{id}")
     ResponseEntity<ResponeObject> getPubkey(@PathVariable String id) {
         Optional<Customer> foundID = customerResponsitory.findById(id);
