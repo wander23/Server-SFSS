@@ -37,6 +37,18 @@ public class CustomerController {
                 );
     }
 
+    @GetMapping("/pubkey/{id}")
+    ResponseEntity<ResponeObject> getPubkey(@PathVariable String id) {
+        Optional<Customer> foundID = customerResponsitory.findById(id);
+        return !foundID.isPresent() ?
+                ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
+                        new ResponeObject("")
+                ) :
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new ResponeObject(foundID)
+                );
+    }
+
     @GetMapping("/username/{username}")
     ResponseEntity<ResponeObject> username(@PathVariable String username) {
         Optional<Customer> foundCustomer = customerResponsitory.findByUsername(username);
